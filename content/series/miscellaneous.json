@@ -1,0 +1,45 @@
+{
+  "slug": "miscellaneous",
+  "title": "Miscellaneous",
+  "year": 2025,
+  "tags": ["dance", "movement", "people"],
+  "description": "Work that doesn't fit anywhere else — and doesn't need to. Including dance: bodies in motion, light catching what a fraction of a second can hold.",
+  "cover": "01.jpg",
+  "order": 8,
+  "images": [
+    {
+      "src": "01.jpg",
+      "layout": "full-bleed",
+      "alt": "Dance — figure in motion — placeholder",
+      "caption": "—",
+      "width": 1707,
+      "height": 2560
+    },
+    {
+      "src": "02.jpg",
+      "layout": "single",
+      "alt": "Dance — gesture detail — placeholder",
+      "caption": "—",
+      "width": 1920,
+      "height": 1280
+    },
+    {
+      "src": ["03.jpg", "04.jpg"],
+      "layout": "pair",
+      "alt": [
+        "Dance — pair — placeholder",
+        "Dance — solo — placeholder"
+      ],
+      "width": 1280,
+      "height": 1920
+    },
+    {
+      "src": "05.jpg",
+      "layout": "single",
+      "alt": "Miscellaneous — placeholder",
+      "caption": "—",
+      "width": 1920,
+      "height": 1280
+    }
+  ]
+}

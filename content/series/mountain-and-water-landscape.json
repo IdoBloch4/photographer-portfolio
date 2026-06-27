@@ -1,0 +1,62 @@
+{
+  "slug": "mountain-and-water-landscape",
+  "title": "Mountain and Water Landscape",
+  "year": 2025,
+  "tags": ["nature", "travel", "mountains"],
+  "description": "Mountains, valleys, coastlines, and the slow places between. Long looks at land that isn't waiting for me.",
+  "cover": "01.jpg",
+  "order": 3,
+  "images": [
+    {
+      "src": "01.jpg",
+      "layout": "full-bleed",
+      "alt": "A mountain road bending out of frame, with an alpenglow-lit peak rising above forested ridges at last light",
+      "caption": "Karpenisi, Greece — last light",
+      "width": 2560,
+      "height": 1707
+    },
+    {
+      "src": "02.jpg",
+      "layout": "single",
+      "alt": "An 18th-century stone arch bridge over a still mountain stream, with reflection forming a perfect almond shape",
+      "caption": "Kalogeriko bridge, Zagori",
+      "width": 2560,
+      "height": 1707
+    },
+    {
+      "src": ["03.jpg", "04.jpg"],
+      "layout": "pair",
+      "alt": [
+        "Granite peaks rising from the sea above a small fishing village in low Arctic light",
+        "Wide coastal view with serrated mountains catching warm side-light against deep blue water"
+      ],
+      "caption": "Lofoten, Norway",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "src": "05.jpg",
+      "layout": "single",
+      "alt": "A traditional wooden cabin on a green hillside, with snow-capped Slovenian Alps and broken cloud light behind",
+      "caption": "Logar Valley, Slovenia",
+      "width": 1620,
+      "height": 1080
+    },
+    {
+      "src": "06.jpg",
+      "layout": "full-bleed",
+      "alt": "Wide panoramic landscape (placeholder)",
+      "caption": "—",
+      "width": 2400,
+      "height": 1600
+    },
+    {
+      "src": "07.jpg",
+      "layout": "single",
+      "alt": "Landscape detail (placeholder)",
+      "caption": "—",
+      "width": 1620,
+      "height": 1080
+    }
+  ]
+}

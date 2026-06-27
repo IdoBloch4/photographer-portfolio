@@ -1,0 +1,45 @@
+{
+  "slug": "animals-and-wildlife",
+  "title": "Animals and Wildlife",
+  "year": 2025,
+  "tags": ["wildlife", "animals", "nature"],
+  "description": "Creatures going about their lives, indifferent to the camera. The patience required to be there when something happens.",
+  "cover": "01.jpg",
+  "order": 6,
+  "images": [
+    {
+      "src": "01.jpg",
+      "layout": "full-bleed",
+      "alt": "Wildlife portrait — placeholder",
+      "caption": "—",
+      "width": 2560,
+      "height": 1707
+    },
+    {
+      "src": "02.jpg",
+      "layout": "single",
+      "alt": "Animal in habitat — placeholder",
+      "caption": "—",
+      "width": 1920,
+      "height": 1280
+    },
+    {
+      "src": ["03.jpg", "04.jpg"],
+      "layout": "pair",
+      "alt": [
+        "Wildlife detail — placeholder",
+        "Animal behaviour — placeholder"
+      ],
+      "width": 1920,
+      "height": 1280
+    },
+    {
+      "src": "05.jpg",
+      "layout": "single",
+      "alt": "Wildlife in landscape — placeholder",
+      "caption": "—",
+      "width": 1920,
+      "height": 1280
+    }
+  ]
+}

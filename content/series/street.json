@@ -1,0 +1,45 @@
+{
+  "slug": "street",
+  "title": "Street",
+  "year": 2026,
+  "tags": ["documentary", "urban", "architecture"],
+  "description": "Slow walks through cities. The kind of looking that requires standing still for a minute, then another.",
+  "cover": "01.jpg",
+  "order": 7,
+  "images": [
+    {
+      "src": "01.jpg",
+      "layout": "full-bleed",
+      "alt": "Five canal-house facades at blue hour with their warm-lit windows reflected in the still water below",
+      "caption": "Damrak, Amsterdam — blue hour",
+      "width": 1620,
+      "height": 1080
+    },
+    {
+      "src": "02.jpg",
+      "layout": "single",
+      "alt": "A cyclist in a red coat crossing a bridge, framed beneath the stone arch of a closer bridge, in winter fog",
+      "caption": "Reguliersgracht, Amsterdam",
+      "width": 1620,
+      "height": 1080
+    },
+    {
+      "src": ["03.jpg", "04.jpg"],
+      "layout": "pair",
+      "alt": [
+        "Street scene — placeholder",
+        "Vertical detail of an urban doorway — placeholder"
+      ],
+      "width": 1620,
+      "height": 1080
+    },
+    {
+      "src": "05.jpg",
+      "layout": "single",
+      "alt": "Wide street view (placeholder)",
+      "caption": "—",
+      "width": 1800,
+      "height": 1200
+    }
+  ]
+}

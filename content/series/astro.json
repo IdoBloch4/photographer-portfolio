@@ -1,0 +1,45 @@
+{
+  "slug": "astro",
+  "title": "Astro",
+  "year": 2025,
+  "tags": ["night", "long-exposure", "milky-way"],
+  "description": "Long exposures of the night sky. The earth keeps spinning; the camera keeps the shutter open.",
+  "cover": "01.jpg",
+  "order": 9,
+  "images": [
+    {
+      "src": "01.jpg",
+      "layout": "full-bleed",
+      "alt": "Wide astro panorama of the Milky Way over a landscape — placeholder",
+      "caption": "—",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "src": "02.jpg",
+      "layout": "single",
+      "alt": "Star trails over a landscape — placeholder",
+      "caption": "—",
+      "width": 1920,
+      "height": 1280
+    },
+    {
+      "src": ["03.jpg", "04.jpg"],
+      "layout": "pair",
+      "alt": [
+        "Vertical of the Milky Way core — placeholder",
+        "Aurora over mountains — placeholder"
+      ],
+      "width": 1920,
+      "height": 1280
+    },
+    {
+      "src": "05.jpg",
+      "layout": "full-bleed",
+      "alt": "Wide astro panorama — placeholder",
+      "caption": "—",
+      "width": 2560,
+      "height": 1440
+    }
+  ]
+}

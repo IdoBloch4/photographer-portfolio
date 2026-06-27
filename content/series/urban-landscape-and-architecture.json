@@ -1,0 +1,45 @@
+{
+  "slug": "urban-landscape-and-architecture",
+  "title": "Urban Landscape and Architecture",
+  "year": 2025,
+  "tags": ["city", "architecture", "geometry"],
+  "description": "Cities as structures — the grid, the facade, the shadow cast by a building at noon. What the architect meant and what time has made of it.",
+  "cover": "01.jpg",
+  "order": 4,
+  "images": [
+    {
+      "src": "01.jpg",
+      "layout": "full-bleed",
+      "alt": "Urban skyline or architectural facade — placeholder",
+      "caption": "—",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "src": "02.jpg",
+      "layout": "single",
+      "alt": "Architectural detail — placeholder",
+      "caption": "—",
+      "width": 1920,
+      "height": 1280
+    },
+    {
+      "src": ["03.jpg", "04.jpg"],
+      "layout": "pair",
+      "alt": [
+        "Urban geometry, vertical — placeholder",
+        "Urban geometry, horizontal — placeholder"
+      ],
+      "width": 1920,
+      "height": 1280
+    },
+    {
+      "src": "05.jpg",
+      "layout": "single",
+      "alt": "City at night — placeholder",
+      "caption": "—",
+      "width": 1920,
+      "height": 1280
+    }
+  ]
+}

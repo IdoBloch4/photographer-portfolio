@@ -1,0 +1,45 @@
+{
+  "slug": "seascape",
+  "title": "Seascape",
+  "year": 2025,
+  "tags": ["ocean", "water", "coast"],
+  "description": "The sea in all its moods — glass-calm and storm-grey, at dawn and at dusk. The horizon that never gets closer.",
+  "cover": "01.jpg",
+  "order": 2,
+  "images": [
+    {
+      "src": "01.jpg",
+      "layout": "full-bleed",
+      "alt": "Wide seascape — placeholder",
+      "caption": "—",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "src": "02.jpg",
+      "layout": "single",
+      "alt": "Coastal detail — placeholder",
+      "caption": "—",
+      "width": 1920,
+      "height": 1280
+    },
+    {
+      "src": ["03.jpg", "04.jpg"],
+      "layout": "pair",
+      "alt": [
+        "Sea at dawn — placeholder",
+        "Waves on rock — placeholder"
+      ],
+      "width": 1920,
+      "height": 1280
+    },
+    {
+      "src": "05.jpg",
+      "layout": "single",
+      "alt": "Seascape at dusk — placeholder",
+      "caption": "—",
+      "width": 1920,
+      "height": 1280
+    }
+  ]
+}

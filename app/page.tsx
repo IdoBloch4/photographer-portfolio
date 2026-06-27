@@ -1,65 +1,111 @@
-import Image from "next/image";
+import Link from "next/link";
+import { Link as VTLink } from "next-view-transitions";
+import { getAllSeries } from "@/lib/series";
+import { Photo } from "@/components/gallery/Photo";
+import { site } from "@/lib/site";
 
-export default function Home() {
+export default async function HomePage() {
+  const series = await getAllSeries();
+  // Curated triptych — first image of the first three series.
+  const triptych = series.slice(0, 3);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div>
+      {/* Hero — natural-flow content sized by its own height. */}
+      <section className="mx-auto max-w-[1440px] px-6 sm:px-10 pt-10 sm:pt-14 pb-12 sm:pb-16">
+        <div className="grid grid-cols-12 gap-6 lg:gap-10 lg:items-end">
+          <div className="col-span-12 lg:col-span-7">
+            <p className="text-mono-cap mb-4 sm:mb-6">
+              Photographer
+              {series.map((s) => (
+                <span key={s.slug}>
+                  {" · "}
+                  <Link
+                    href={`/work/${s.slug}`}
+                    className="link-underline hover:text-terracotta"
+                  >
+                    {s.title}
+                  </Link>
+                </span>
+              ))}
+            </p>
+            <h1
+              className="font-display text-display tracking-tight text-cocoa"
+              style={{ fontVariationSettings: '"SOFT" 50, "opsz" 144' }}
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+              {site.name}
+            </h1>
+          </div>
+          <div className="col-span-12 lg:col-span-5 mt-4 lg:mt-0">
+            <p className="font-display text-h2 italic text-stone max-w-md leading-snug">
+              A quiet study of scale —<br />
+              from the dust on a leaf to the dust between stars.
+            </p>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      </section>
+
+      {/* Curated triptych */}
+      {triptych.length > 0 ? (
+        <section className="mx-auto max-w-[1440px] px-6 sm:px-10">
+          <div className="grid grid-cols-12 gap-6 sm:gap-8">
+            {triptych.map((s, i) => {
+              // Asymmetric: 5/4/3 columns on lg, full on mobile
+              const colClasses = [
+                "col-span-12 lg:col-span-5",
+                "col-span-12 sm:col-span-6 lg:col-span-4",
+                "col-span-12 sm:col-span-6 lg:col-span-3",
+              ];
+              const cover = s.images.find((img) => img.src === s.cover) ?? s.images[0];
+              const filename = Array.isArray(cover.src) ? cover.src[0] : cover.src;
+              const alt = Array.isArray(cover.alt) ? cover.alt[0] : cover.alt;
+              return (
+                <VTLink
+                  key={s.slug}
+                  href={`/work/${s.slug}`}
+                  className={`group ${colClasses[i]}`}
+                >
+                  <Photo
+                    seriesSlug={s.slug}
+                    filename={filename}
+                    alt={alt}
+                    width={cover.width}
+                    height={cover.height}
+                    sizes="(min-width: 1024px) 33vw, 100vw"
+                    priority={i === 0}
+                    viewTransitionName={`cover-${s.slug}`}
+                  />
+                  <div className="mt-3 flex items-baseline justify-between">
+                    <p className="font-display italic text-lg text-cocoa group-hover:text-terracotta transition-colors duration-200">
+                      {s.title}
+                    </p>
+                    <p className="text-mono-cap">{s.year}</p>
+                  </div>
+                </VTLink>
+              );
+            })}
+          </div>
+        </section>
+      ) : null}
+
+      {/* Statement */}
+      <section className="mx-auto max-w-2xl px-6 sm:px-10 py-20 sm:py-28 text-center">
+        <p className="font-display italic text-h2 text-cocoa leading-snug">
+          “I make pictures slowly. I look until something looks back.”
+        </p>
+      </section>
+
+      {/* CTA strip */}
+      <section className="mx-auto max-w-[1440px] px-6 sm:px-10 pb-16">
+        <div className="border-t border-sand pt-10">
+          <Link
+            href="/work"
+            className="link-underline font-display text-2xl sm:text-3xl text-terracotta"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            View all series →
+          </Link>
         </div>
-      </main>
+      </section>
     </div>
   );
 }

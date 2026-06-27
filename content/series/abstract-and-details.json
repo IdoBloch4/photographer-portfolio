@@ -1,0 +1,45 @@
+{
+  "slug": "abstract-and-details",
+  "title": "Abstract and Details",
+  "year": 2025,
+  "tags": ["form", "color", "minimal"],
+  "description": "Pictures that aren't really of anything — except light, color, and the line between them.",
+  "cover": "01.jpg",
+  "order": 1,
+  "images": [
+    {
+      "src": "01.jpg",
+      "layout": "full-bleed",
+      "alt": "Abstract color study, square format — placeholder",
+      "caption": "—",
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "src": "02.jpg",
+      "layout": "single",
+      "alt": "Vertical abstract with strong color form — placeholder",
+      "caption": "—",
+      "width": 1600,
+      "height": 2000
+    },
+    {
+      "src": ["03.jpg", "04.jpg"],
+      "layout": "pair",
+      "alt": [
+        "Abstract horizontal, warm tones — placeholder",
+        "Abstract vertical, complementary tones — placeholder"
+      ],
+      "width": 1920,
+      "height": 1280
+    },
+    {
+      "src": "05.jpg",
+      "layout": "single",
+      "alt": "Abstract panorama, minimal — placeholder",
+      "caption": "—",
+      "width": 1920,
+      "height": 1280
+    }
+  ]
+}
