@@ -1,7 +1,17 @@
 {
   "home": {
     "tagline": "A quiet study of scale —\nfrom the dust on a leaf to the dust between stars.",
-    "quote": "I make pictures slowly. I look until something looks back."
+    "quote": "I make pictures slowly. I look until something looks back.",
+    "heroSeriesSlug": "mountain-and-water-landscape",
+    "heroImageFilename": "01.jpg",
+    "featuredSeriesSlugs": [
+      "nature",
+      "animals-and-wildlife",
+      "street",
+      "miscellaneous",
+      "astro",
+      "mountain-and-water-landscape"
+    ]
   },
   "behindTheLens": {
     "paragraphs": [

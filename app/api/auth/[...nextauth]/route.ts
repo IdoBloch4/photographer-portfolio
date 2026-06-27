@@ -1,7 +1,5 @@
-// AUTH_DISABLED: restore this once next-auth is installed and Google OAuth is configured
-// import { handlers } from "@/auth";
-// export const { GET, POST } = handlers;
+import NextAuth from "next-auth";
+import { authOptions } from "@/auth";
 
-import { NextResponse } from "next/server";
-export function GET() { return NextResponse.json({ disabled: true }); }
-export function POST() { return NextResponse.json({ disabled: true }); }
+const handler = NextAuth(authOptions);
+export { handler as GET, handler as POST };

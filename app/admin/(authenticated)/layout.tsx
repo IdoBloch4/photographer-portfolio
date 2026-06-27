@@ -1,22 +1,18 @@
-// AUTH_DISABLED: when re-enabling auth, uncomment these imports and restore session logic
-// import { auth } from "@/auth";
-// import { redirect } from "next/navigation";
-// import { signOut } from "@/auth";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/auth";
+import { redirect } from "next/navigation";
 import Link from "next/link";
+import SignOutButton from "./SignOutButton";
 
 export const metadata = { title: "Admin — Sarit Carmon" };
-
-// AUTH_DISABLED: flip to false and restore session checks once Google OAuth is configured
-const AUTH_DISABLED = true;
 
 export default async function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  // AUTH_DISABLED: restore these when re-enabling auth:
-  // const session = await auth();
-  // if (!session) redirect("/admin/login");
+  const session = await getServerSession(authOptions);
+  if (!session) redirect("/admin/login");
 
   return (
     <div className="min-h-screen bg-[#f9f7f4]">
@@ -29,32 +25,26 @@ export default async function AdminLayout({
             Admin
           </Link>
           <div className="flex gap-6 text-mono-cap">
-            <Link
-              href="/admin/series"
-              className="text-stone hover:text-cocoa transition-colors"
-            >
+            <Link href="/admin/home" className="text-stone hover:text-cocoa transition-colors">
+              Home
+            </Link>
+            <Link href="/admin/series" className="text-stone hover:text-cocoa transition-colors">
               Series
             </Link>
-            <Link
-              href="/admin/content"
-              className="text-stone hover:text-cocoa transition-colors"
-            >
+            <Link href="/admin/content" className="text-stone hover:text-cocoa transition-colors">
               Content
             </Link>
-            <Link
-              href="/"
-              className="text-stone hover:text-cocoa transition-colors"
-              target="_blank"
-            >
+            <Link href="/" className="text-stone hover:text-cocoa transition-colors" target="_blank">
               View Site
             </Link>
           </div>
         </div>
-        {AUTH_DISABLED && (
+        <div className="flex items-center gap-4">
           <span className="text-mono-cap text-stone hidden sm:block">
-            Auth disabled (dev mode)
+            {session.user?.email}
           </span>
-        )}
+          <SignOutButton />
+        </div>
       </nav>
       <main className="mx-auto max-w-5xl px-6 py-10">{children}</main>
     </div>

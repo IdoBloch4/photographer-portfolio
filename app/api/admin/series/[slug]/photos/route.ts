@@ -1,19 +1,10 @@
-// AUTH_DISABLED: restore auth imports and checks once Google OAuth is configured
-// import { auth } from "@/auth";
+import { getServerSession } from "next-auth";
+import { authOptions, isAdmin } from "@/auth";
 import { NextResponse } from "next/server";
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import type { SeriesImage, SeriesImageLayout } from "@/lib/series";
 import sharp from "sharp";
-
-// AUTH_DISABLED: set to false once Google OAuth is configured
-const AUTH_DISABLED = true;
-
-const ADMIN_EMAILS = ["idobloch@gmail.com", "tirasc@gmail.com"];
-
-function isAdmin(email?: string | null) {
-  return AUTH_DISABLED || (!!email && ADMIN_EMAILS.includes(email));
-}
 
 const SERIES_DIR = path.join(process.cwd(), "content", "series");
 const PUBLIC_DIR = path.join(process.cwd(), "public");
@@ -33,12 +24,7 @@ async function uniqueFilename(dir: string, original: string): Promise<string> {
   const base = path.basename(original, ext).replace(/[^a-z0-9_-]/gi, "_");
   let candidate = `${base}${ext}`;
   let n = 1;
-  while (
-    await fs
-      .access(path.join(dir, candidate))
-      .then(() => true)
-      .catch(() => false)
-  ) {
+  while (await fs.access(path.join(dir, candidate)).then(() => true).catch(() => false)) {
     candidate = `${base}_${n}${ext}`;
     n++;
   }
@@ -49,13 +35,13 @@ export async function POST(
   req: Request,
   { params }: { params: Promise<{ slug: string }> }
 ) {
-  if (!isAdmin()) {
+  const session = await getServerSession(authOptions);
+  if (!isAdmin(session?.user?.email)) {
     return new Response("Unauthorized", { status: 401 });
   }
 
   const { slug } = await params;
   const formData = await req.formData();
-
   const layout = formData.get("layout") as SeriesImageLayout;
   const caption = (formData.get("caption") as string) || undefined;
   const altValues = formData.getAll("alt") as string[];
@@ -67,7 +53,6 @@ export async function POST(
   await fs.mkdir(imageDir, { recursive: true });
 
   const { filePath, series } = await getSeriesFile(slug);
-
   const savedNames: string[] = [];
   const dimensions: { width: number; height: number }[] = [];
 
@@ -75,14 +60,13 @@ export async function POST(
     const filename = await uniqueFilename(imageDir, file.name);
     const buffer = Buffer.from(await file.arrayBuffer());
     await fs.writeFile(path.join(imageDir, filename), buffer);
-
     const meta = await sharp(buffer).metadata();
     dimensions.push({ width: meta.width ?? 1920, height: meta.height ?? 1280 });
     savedNames.push(filename);
   }
 
-  let newImage: SeriesImage;
   const isMulti = savedNames.length > 1;
+  let newImage: SeriesImage;
 
   if (isMulti) {
     newImage = {
@@ -108,7 +92,6 @@ export async function POST(
 
   series.images.push(newImage);
   await saveSeriesFile(filePath, series);
-
   return NextResponse.json({ image: newImage });
 }
 
@@ -116,7 +99,8 @@ export async function DELETE(
   req: Request,
   { params }: { params: Promise<{ slug: string }> }
 ) {
-  if (!isAdmin()) {
+  const session = await getServerSession(authOptions);
+  if (!isAdmin(session?.user?.email)) {
     return new Response("Unauthorized", { status: 401 });
   }
 
@@ -138,9 +122,7 @@ export async function DELETE(
 
   if (series.cover === filename) {
     const first = series.images[0];
-    series.cover = first
-      ? Array.isArray(first.src) ? first.src[0] : first.src
-      : "";
+    series.cover = first ? (Array.isArray(first.src) ? first.src[0] : first.src) : "";
   }
 
   await saveSeriesFile(seriesFilePath, series);

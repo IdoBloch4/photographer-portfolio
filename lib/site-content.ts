@@ -5,6 +5,9 @@ export interface SiteContent {
   home: {
     tagline: string;
     quote: string;
+    heroSeriesSlug: string;
+    heroImageFilename: string;
+    featuredSeriesSlugs: string[];
   };
   behindTheLens: {
     paragraphs: string[];
