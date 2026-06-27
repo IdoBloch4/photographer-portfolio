@@ -90,7 +90,7 @@ export function flattenSeriesImages(series: Series): FlatImage[] {
       img.src.forEach((s, i) => {
         out.push({
           src: imageSrc(series.slug, s),
-          alt: img.alt[i],
+          alt: (img.alt as string[])[i],
           caption: img.caption,
           width: img.width,
           height: img.height,
@@ -99,4 +99,12 @@ export function flattenSeriesImages(series: Series): FlatImage[] {
     } else if (typeof img.src === "string" && typeof img.alt === "string") {
       out.push({
         src: imageSrc(series.slug, img.src),
-        alt: img.a
+        alt: img.alt,
+        caption: img.caption,
+        width: img.width,
+        height: img.height,
+      });
+    }
+  }
+  return out;
+}

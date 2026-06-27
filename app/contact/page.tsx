@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { site } from "@/lib/site";
+import { getSiteContent } from "@/lib/site-content";
 import { MailIcon, InstagramIcon } from "@/components/ui/Icons";
 
 export const metadata: Metadata = {
@@ -7,7 +8,10 @@ export const metadata: Metadata = {
   description: `Get in touch with ${site.name}.`,
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const content = await getSiteContent();
+  const { heading, body } = content.contact;
+
   return (
     <div className="mx-auto max-w-[1440px] px-6 sm:px-10 py-24 sm:py-40 min-h-[60vh] flex flex-col justify-center">
       <p className="text-mono-cap mb-6">Inquiries · Prints · Commissions</p>
@@ -19,7 +23,7 @@ export default function ContactPage() {
           fontVariationSettings: '"SOFT" 50, "opsz" 144',
         }}
       >
-        Write to me.
+        {heading}
       </h1>
       <a
         href={`mailto:${site.email}`}
@@ -30,10 +34,7 @@ export default function ContactPage() {
           {site.email}
         </span>
       </a>
-      <p className="mt-16 max-w-md text-stone leading-relaxed">
-        I read everything. Responses sometimes take a few days — I prefer to
-        write thoughtfully when I can.
-      </p>
+      <p className="mt-16 max-w-md text-stone leading-relaxed">{body}</p>
       <ul className="mt-12 flex flex-wrap gap-x-8 gap-y-3 text-mono-cap">
         <li>
           <a

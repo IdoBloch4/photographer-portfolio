@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { site } from "@/lib/site";
+import { getSiteContent } from "@/lib/site-content";
 import { MailIcon } from "@/components/ui/Icons";
 
 export const metadata: Metadata = {
@@ -7,7 +8,11 @@ export const metadata: Metadata = {
   description: `About ${site.name} — artist statement, philosophy, and gear.`,
 };
 
-export default function BehindTheLensPage() {
+export default async function BehindTheLensPage() {
+  const content = await getSiteContent();
+  const { paragraphs, pullQuote, basedIn, cameras, print } =
+    content.behindTheLens;
+
   return (
     <div className="mx-auto max-w-[1440px] px-6 sm:px-10 pt-16 sm:pt-24 pb-20">
       <div className="grid grid-cols-12 gap-8 lg:gap-16">
@@ -38,38 +43,27 @@ export default function BehindTheLensPage() {
           </h1>
 
           <div className="space-y-6 text-lg leading-relaxed text-cocoa">
-            <p>
-              I make pictures slowly. I'd rather sit with a place for an hour
-              than walk past ten of them — most of what I find good seems to
-              ask for that kind of time.
-            </p>
-
-            <p className="font-display italic text-h2 text-stone py-4 border-l-2 border-terracotta pl-6">
-              The work moves between scales — pollen on a stamen, an alley at
-              dusk, a galaxy edge-on. To me they're the same picture, asked at
-              different magnifications.
-            </p>
-
-            <p>
-              I shoot 35mm digital and a small Pentax 645. I print on warm-tone
-              paper. I do not retouch faces or edit out the small ugly things;
-              they belong to the picture.
-            </p>
-
-            <p>
-              Currently based between Tel Aviv and the Galilee. Available for
-              private commissions, prints, and the occasional gallery
-              correspondence — please write.
-            </p>
+            {paragraphs.map((para, i) =>
+              para === pullQuote ? (
+                <p
+                  key={i}
+                  className="font-display italic text-h2 text-stone py-4 border-l-2 border-terracotta pl-6"
+                >
+                  {para}
+                </p>
+              ) : (
+                <p key={i}>{para}</p>
+              )
+            )}
           </div>
 
           <dl className="mt-16 grid grid-cols-2 gap-x-8 gap-y-4 text-mono-cap">
             <dt>Based in</dt>
-            <dd className="text-stone">Tel Aviv / Galilee</dd>
+            <dd className="text-stone">{basedIn}</dd>
             <dt>Cameras</dt>
-            <dd className="text-stone">Sony A7R IV · Pentax 645</dd>
+            <dd className="text-stone">{cameras}</dd>
             <dt>Print</dt>
-            <dd className="text-stone">Hahnemühle Photo Rag Baryta</dd>
+            <dd className="text-stone">{print}</dd>
             <dt>Inquiries</dt>
             <dd className="text-stone">
               <a
