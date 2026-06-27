@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { site } from "@/lib/site";
 import { getSiteContent } from "@/lib/site-content";
-import { MailIcon, InstagramIcon } from "@/components/ui/Icons";
+import { MailIcon, InstagramIcon, FacebookIcon } from "@/components/ui/Icons";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -46,6 +46,19 @@ export default async function ContactPage() {
             <span className="inline-flex items-center gap-[0.3em]">
               <InstagramIcon />
               Instagram
+            </span>
+          </a>
+        </li>
+        <li>
+          <a
+            href={site.facebook}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link-underline text-cocoa hover:text-terracotta"
+          >
+            <span className="inline-flex items-center gap-[0.3em]">
+              <FacebookIcon />
+              Facebook
             </span>
           </a>
         </li>

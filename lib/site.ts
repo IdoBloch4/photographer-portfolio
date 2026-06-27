@@ -12,11 +12,12 @@ export const site = {
   ogImage: "/og.jpg",
   email: "tirasc@gmail.com",
   instagram: "https://www.instagram.com/saritcarmon/",
+  facebook: "https://www.facebook.com/sarit.carmon",
   copyrightStart: 2026,
 } as const;
 
 export const navLinks = [
-  { href: "/work", label: "Work" },
+  { href: "/work", label: "Galleries" },
   { href: "/behind-the-lens", label: "Behind the Lens" },
   { href: "/contact", label: "Contact" },
 ] as const;

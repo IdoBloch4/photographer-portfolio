@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { site } from "@/lib/site";
-import { MailIcon, InstagramIcon } from "@/components/ui/Icons";
+import { MailIcon, InstagramIcon, FacebookIcon } from "@/components/ui/Icons";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -46,10 +46,20 @@ export function Footer() {
             </a>
           </li>
           <li>
-            <Link
-              href="/contact"
+            <a
+              href={site.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
               className="link-underline text-cocoa hover:text-terracotta"
             >
+              <span className="inline-flex items-center gap-[0.3em]">
+                <FacebookIcon />
+                Facebook
+              </span>
+            </a>
+          </li>
+          <li>
+            <Link href="/contact" className="link-underline text-cocoa hover:text-terracotta">
               Contact
             </Link>
           </li>
