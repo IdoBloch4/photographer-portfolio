@@ -2,7 +2,11 @@
   "slug": "nature",
   "title": "Nature",
   "year": 2025,
-  "tags": ["nature", "detail", "1:1"],
+  "tags": [
+    "nature",
+    "detail",
+    "1:1"
+  ],
   "description": "The world at life-size. Pollen on a stamen, the dust on a wing, the small geometries of a single seed.",
   "cover": "01.jpg",
   "order": 5,
@@ -16,15 +20,10 @@
       "height": 2000
     },
     {
-      "src": "02.jpg",
-      "layout": "single",
-      "alt": "Macro of a leaf vein — placeholder",
-      "caption": "—",
-      "width": 1920,
-      "height": 1280
-    },
-    {
-      "src": ["03.jpg", "04.jpg"],
+      "src": [
+        "03.jpg",
+        "04.jpg"
+      ],
       "layout": "pair",
       "alt": [
         "Vertical macro of an insect on a petal — placeholder",

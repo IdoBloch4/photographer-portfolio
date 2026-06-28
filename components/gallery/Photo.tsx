@@ -16,7 +16,10 @@ interface PhotoProps {
   sizes?: string;
   /** True for above-the-fold images that should not be lazy-loaded */
   priority?: boolean;
+  /** Extra classes applied to the outer <figure> */
   className?: string;
+  /** Extra classes applied directly to the <img> — use Tailwind ! to override defaults */
+  imgClassName?: string;
   /** Optional view-transition-name for shared-element transitions */
   viewTransitionName?: string;
   /** When true, an invisible overlay button is rendered. The SeriesLightbox
@@ -39,6 +42,7 @@ export async function Photo({
   sizes = "100vw",
   priority,
   className,
+  imgClassName,
   viewTransitionName,
   enableLightbox,
 }: PhotoProps) {
@@ -64,7 +68,7 @@ export async function Photo({
         placeholder={blurDataURL ? "blur" : "empty"}
         blurDataURL={blurDataURL ?? undefined}
         quality={88}
-        className="block w-full h-auto select-none"
+        className={`block w-full h-auto select-none${imgClassName ? ` ${imgClassName}` : ""}`}
         draggable={false}
       />
       {enableLightbox ? (
