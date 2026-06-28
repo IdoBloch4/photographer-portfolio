@@ -2,23 +2,38 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { navLinks, site } from "@/lib/site";
 
 export function Nav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const scrollYRef = useRef(0);
 
   // Close mobile sheet on route change
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
 
-  // Lock scroll while sheet is open
+  // iOS-safe scroll lock: position:fixed trick preserves fixed children visibility.
+  // overflow:hidden on body is NOT used because on iOS Safari it hides
+  // position:fixed elements inside the same stacking context.
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
+    if (open) {
+      scrollYRef.current = window.scrollY;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollYRef.current}px`;
+      document.body.style.width = "100%";
+    } else {
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      window.scrollTo(0, scrollYRef.current);
+    }
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
     };
   }, [open]);
 
@@ -79,24 +94,24 @@ export function Nav() {
                 strokeLinecap="square"
               />
             ) : (
-              <>
-                <path
-                  d="M3 6h14M3 14h14"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="square"
-                />
-              </>
+              <path
+                d="M3 6h14M3 14h14"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="square"
+              />
             )}
           </svg>
         </button>
       </div>
 
-      {/* Mobile sheet */}
+      {/* Mobile sheet — no sm:hidden here; the {open &&} gate is enough.
+          sm:hidden was previously causing display:none to win over fixed
+          positioning on certain iOS/Android browsers. */}
       {open && (
         <div
           id="mobile-menu"
-          className="sm:hidden fixed inset-x-0 top-16 bottom-0 bg-cream z-30 overflow-y-auto"
+          className="fixed inset-x-0 top-16 bottom-0 bg-cream z-50 overflow-y-auto"
         >
           <ul className="flex flex-col px-6 py-10 gap-6">
             {navLinks.map((link) => {
